@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-sentiment-analysis
+spec:
+  replicas: 2 # start with 2 replicas
+  selector:
+    matchLabels:
+      app: fastapi-sentiment-analysis
+  template:
+    metadata:
+      labels:
+        app: fastapi-sentiment-analysis
+    spec:
+      containers:
+      - name: fastapi-sentiment-analysis
+        image: llm-sentiment
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
